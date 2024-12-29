@@ -1,5 +1,4 @@
 import Header from "@/components/Header";
-import { Search } from "lucide-react";
 
 export default function Home() {
   return (
