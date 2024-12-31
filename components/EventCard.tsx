@@ -21,6 +21,12 @@ function EventCard({ eventId }: { eventId: Id<"events"> }) {
     userId: user?.id ?? "",
   });
 
+  const imageUrl = useStorageUrl(event?.imageStorageId);
+
+  if (!event || !availability) {
+    return null;
+  }
+
   return <div>EventCard</div>;
 }
 

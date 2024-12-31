@@ -1,6 +1,7 @@
 import { query, mutation } from "./_generated/server";
 import { ConvexError, v } from "convex/values";
-import { DURATIONS, WAITING_LIST_STATUS, TICKET_STATUS } from "./constants";
+import { WAITING_LIST_STATUS, TICKET_STATUS } from "./constants";
+// import { DURATIONS } from "./constants";
 
 export const get = query({
     args: {},
