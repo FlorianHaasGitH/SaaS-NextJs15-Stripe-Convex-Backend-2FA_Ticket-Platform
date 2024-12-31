@@ -1,7 +1,6 @@
-import { query } from "./_generated/server";
-import { v } from "convex/values";
-
-import { TICKET_STATUS } from "./constants";
+import { query, mutation } from "./_generated/server";
+import { ConvexError, v } from "convex/values";
+import { DURATIONS, WAITING_LIST_STATUS, TICKET_STATUS } from "./constants";
 
 export const get = query({
     args: {},
@@ -18,7 +17,6 @@ export const getById = query({
     handler: async (ctx, { eventId }) => {
       return await ctx.db.get(eventId);
     },
-
 });
 
 export const getEventAvailability = query({
@@ -62,9 +60,5 @@ export const getEventAvailability = query({
         activeOffers,
         remainingTickets: Math.max(0, event.totalTickets - totalReserved),
       };
-
-
-
-
     },
 });
