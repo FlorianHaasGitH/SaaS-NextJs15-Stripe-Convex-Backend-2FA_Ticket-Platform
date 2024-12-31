@@ -1,13 +1,17 @@
 "use client";
 
+import EventCard from "@/components/EventCard";
 import { Id } from "@/convex/_generated/dataModel";
 import { api } from "@/convex/_generated/api";
 import { useQuery } from "convex/react";
-import { useUser } from "@clerk/nextjs";
 import { CalendarDays, MapPin, Ticket, Users } from "lucide-react";
 import { useParams } from "next/navigation";
 import Spinner from "@/components/Spinner";
+import JoinQueue from "@/components/JoinQueue";
+import { SignInButton, useUser } from "@clerk/nextjs";
 import { useStorageUrl } from "@/lib/utils";
+import Image from "next/image";
+import Button from "@/components/ui/button";
 
 export default function EventPage() {
   const { user } = useUser();
@@ -92,6 +96,38 @@ export default function EventPage() {
                     {availability.totalTickets} left
                   </p>
                 </div>
+              </div>
+
+              {/* Additional Event Information */}
+              <div className="bg-blue-50 border border-blue-100 rounded-lg p-6">
+                <h3 className="text-lg font-semibold text-blue-900 mb-2">
+                  Event Information
+                </h3>
+                <ul className="space-y-2 text-blue-700">
+                  <li>• Please arrive 30 minutes before the event starts</li>
+                  <li>• Tickets are non-refundable</li>
+                  <li>• Age restriction: 18+</li>
+                </ul>
+              </div>
+
+              {/* Right Column - Ticket Purchase Card */}
+              <div>
+                <div className="sticky top-8 space-y-4">
+                  <EventCard eventId={params.id as Id<"events">} />
+                </div>
+
+                {user ? (
+                  <JoinQueue
+                    eventId={params.id as Id<"events">}
+                    userId={user.id}
+                  />
+                ) : (
+                  <SignInButton>
+                    <Button className="w-full bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900 text-white font-medium py-2 px-4 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg">
+                      Sign in to buy tickets
+                    </Button>
+                  </SignInButton>
+                )}
               </div>
             </div>
           </div>
