@@ -1,13 +1,6 @@
-import { clsx, type ClassValue } from "clsx";
-import { twMerge } from "tailwind-merge";
-import { Id } from "@/convex/_generated/dataModel";
-import { api } from "@/convex/_generated/api";
-import { useQuery } from "convex/react";
+const baseUrl =
+  process.env.NODE_ENV === "development"
+    ? "http://localhost:3000"
+    : `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`;
 
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
-}
-
-export function useStorageUrl(storageId: Id<"_storage"> | undefined) {
-  return useQuery(api.storage.getUrl, storageId ? { storageId } : "skip");
-}
+export default baseUrl;
